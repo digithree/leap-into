@@ -12,9 +12,9 @@ using ::__strcmp__;  // avoid error: E2316 '__strcmp__' is not a member of 'std'
 }
 #endif
 
-#include "oscpack/osc/OscReceivedElements.h"
-#include "oscpack/osc/OscPacketListener.h"
-#include "oscpack/ip/UdpSocket.h"
+#include <oscpack/osc/OscReceivedElements.h>
+#include <oscpack/osc/OscPacketListener.h>
+#include <oscpack/ip/UdpSocket.h>
 
 
 #define PORT 7000
@@ -31,13 +31,13 @@ protected:
             // example of parsing single messages. osc::OsckPacketListener
             // handles the bundle traversal.
             
-            if( std::strcmp( m.AddressPattern(), "/handnew/position" ) == 0 ){
+            if( std::strcmp( m.AddressPattern(), "/handnew-position:" ) == 0 ){
                 // example #1 -- argument stream interface
                 osc::ReceivedMessageArgumentStream args = m.ArgumentStream();
                 float x, y, z;
                 args >> x >> y >> z >> osc::EndMessage;
                 
-                std::cout << "received '/handnew/position' message with arguments: "
+                std::cout << "received '/handnew-position:' message with arguments: "
                     << x << " " << y << " " << z << "\n";
                 
             }

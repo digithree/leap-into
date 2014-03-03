@@ -6,8 +6,8 @@
  */
 
 
-#include "include/osc/OscOutboundPacketStream.h"
-#include "include/ip/UdpSocket.h"
+#include "oscpack/osc/OscOutboundPacketStream.h"
+#include "oscpack/ip/UdpSocket.h"
 #include "Leap.h"
 
 #include <vector>
