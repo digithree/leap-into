@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>leaphand</title>
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">leaphand</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="leapgesture.html">Prev</a> </td>
+          <th width="60%" align="center">[unofficial]</th>
+          <td width="20%" align="right"> <a accesskey="n" href="leapgesture.html">Next</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="leaphand"></a>
+      <div class="titlepage"></div>
+      <a id="IndexLeaphand" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">leapgesture</span></h2>
+        <p>leaphand — Reads hand data from Leap Motion device</p>
+      </div>
+      <div class="refsect1">
+        <a id="id693533"></a>
+        <h2>Description</h2>
+        <p> Reads hand data from Leap Motion device. The Leap Motion is a motion sensing peripheral specially designed to sense hands, fingers and thin tools (such a pencil or conducting batton). A number of hand sorting criteria are built in to give the user flexibility. Please visit <a href="http://leapmotion.com">leapmotion.com</a> for info on how to perform gestures.</p>
+      </div>
+      <div class="refsect1">
+        <a id="id694126"></a>
+        <h2>Syntax</h2>
+        <pre class="synopsis">kout1 [,kout2, kout3] leaphand khand, kinfo</pre>
+      </div>
+      <div class="refsect1">
+        <a id="id694145"></a>
+        <h2>Initialization</h2>
+        <p><span class="emphasis"><em>khand -- </em></span>hand type. Can be one of the following:</p>
+        <ul>
+          <li>
+            <p>0: newest hand</p>
+          </li>
+          <li>
+            <p>1: oldest hand</p>
+          </li>
+          <li>
+            <p>2: hand A</p>
+          </li>
+          <li>
+            <p>3: hand B</p>
+          </li>
+          <li>
+            <p>4: hand A and B</p>
+          </li>
+        </ul>
+        <p>For stable one handed applications, oldest hand is recommended. Newest hand exposes the user to any noise and false-positive hand detection but may be desirable, especially in conjunction with oldest hand. Note that if only one hand is visible to sensor, oldest and newest hand will give the same data. Hand A/B are designed to be used in two handed applications. Hand A will always be assigned to the first hand that becomes visible, after all hands have disappeared from view. Hand B will only be assigned to a second hand, i.e. the next and oldest hand after hand A is recognised. The hand sorting algorithm attempts to track the same hand consistently while taking sensor noise and hand recognition drop-outs into account. Type 4, hand A and B, gives information in relation to both hands.</p>
+
+        <p><span class="emphasis"><em>kinfo -- </em></span>information type. Can be one of the following for hand types 0 to 3</p>
+        <ul>
+          <li>
+            <p>0: (outs-3) position</p>
+          </li>
+          <li>
+            <p>1: (outs-1) number of fingers</p>
+          </li>
+          <li>
+            <p>2: (outs-1) velocity (magnitude of vector)</p>
+          </li>
+          <li>
+            <p>3: (outs-3) velocity (vector)</p>
+          </li>
+          <li>
+            <p>4: (outs-3) orininatation (roll, pitch, yaw)</p>
+          </li>
+          <li>
+            <p>5: (outs-1) time alive (in seconds)</p>
+          </li>
+          <li>
+            <p>6: (outs-1) activity flag (0 = inactive, 1 = active)</p>
+          </li>
+        </ul>
+        <p>For hand type 4, kinfo can be:</p>
+        <ul>
+          <li>
+            <p>0: (outs-1) distance between hands</p>
+          </li>
+          <li>
+            <p>1: (outs-3) distance between hands (per axis)</p>
+          </li>
+          <li>
+            <p>2: (outs-1) angle of rotation on xz-plane (between -PI/2 and +PI/2, 0 where the line between both hands is parallel to the x-axis)</p>
+          </li>
+        </ul>
+<p>&nbsp;</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<table border="0" summary="Note: Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png" /></td>
+              <th align="left">Note</th>
+        </tr>
+            <tr>
+              <td align="left" valign="top"><p><em>khand </em>and <em>kinfo</em> can be changed dynamically but if changing to a three output <em>kinfo</em> type, three ouput variables must be used initially</p></td>
+            </tr>
+      </table>
+</div>
+<blockquote>
+  <blockquote>&nbsp;</blockquote>
+        </blockquote>
+      </div>
+      <div class="refsect1">
+        <a id="id694427"></a>
+        <h2>Performance</h2>
+        <p>
+	<span class="emphasis"><em>kout</em></span><em>1, kout2, kout3</em>
+	-- k-rate output signals, the number of which is specified by the <em>kinfo</em> type. Three outputs are used for 3D points or vectors, such as hand position or velocity. All other output types are scalar, such as time alive, and only use one output, <em>kout1</em>. Some types have a 3D and a scalar version. Note that all 3D coordinates are normalized to between -1 and 1 (for z and x axies) or between 0 and 1 (for y axis), though there is no out of bounds checking and occasionally a value outside this range may be read. All angles are in radians. All time is in seconds.</p>
+</div>
+      <div class="refsect1">
+        <a id="id693787"></a>
+        <h2>Examples</h2>
+        <p>
+      Here is an example of the leaphand opcode.
+      </p>
+        <div class="example">
+          <a id="id693809"></a>
+          <p class="title">
+            <strong>Example [no number]. Example of the leaphand opcode.</strong>
+          </p>
+          <div class="example-contents">
+            <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
+            <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+-o dac --opcode-lib=libLeapIntoCsound.dylib
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+
+<span class="ohdr">sr</span>     <span class="op">=</span> 44100
+<span class="ohdr">ksmps</span>  <span class="op">=</span> 32
+<span class="ohdr">nchnls</span> <span class="op">=</span> 2
+<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+
+<span class="comment">; FM Synth driven by oldest hand</span>
+<span class="comment">; x-axis = modulation frequency - between 0 and 3 Hz</span>
+<span class="comment">; y-axis = note frequency - between 110 and 800 Hz</span>
+<span class="comment">; z-axis = modulation index - between 0 and 10</span>
+<span class="oblock">instr</span> 1
+
+kposx, kposy, kposz <span class="opc">leaphand</span> 1, 0 <span class="comment">;1 = oldest hand, 0 = hand position</span>
+kactive <span class="opc">portk</span> 1, 6 <span class="comment">;1 = oldest hand, 6 = activity flag</span>
+
+<span class="comment">; Use portamento for smooth change in parameters</span>
+kfreq <span class="opc">port</span> (110 + (kposy * 770)), 0.1
+kmodfreq <span class="opc">port</span> (3 * (kposx+1.0) * 0.5), 0.1
+kmodidx <span class="opc">port</span> (10 * (kposz+1.0) * 0.5), 0.1
+<span class="comment">; note: z-axis range is -1 to 1, so add 1 to it (now between 0 and 2) and half</span>
+
+<span class="comment">; Fade amplitude in if hand is active, out if not</span>
+kamp <span class="opc">port</span> kactive, 0.2
+kamp *= 0.5  <span class="comment">;max amp is 0.5</span>
+
+<span class="comment">; Generate FM synth using f-table 1 (sine wave, see score)</span>
+asig <span class="opc">foscili</span> kamp, kfreq, 1, kmodfreq, kmodidx, 1
+
+<span class="opc">outs</span> asig, asig
+<span class="oblock">endin</span>
+
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="comment">; Run Csound for an hour</span>
+<span class="stamnt">f</span> 0 3600
+<span class="comment">; Sine wave f-table</span>
+<span class="stamnt">f</span> 1 0 16384 10 1
+
+<span class="comment">; Run instrument indefinitely</span>
+<span class="stamnt">i</span> 1 0 -1
+
+<span class="stamnt">e</span>
+
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="id694620"></a>
+        <h2>See Also</h2>
+        <p>
+      <a class="link" href="leapgesture.html" title="leapgesture"><em class="citetitle">leapgesture</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="id694683"></a>
+        <h2>Credits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td width="139">Author: Simon Kenny</td>
+          </tr>
+          <tr>
+            <td>2013</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>New in version 6.? [unofficial]</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="leapgesture.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="leaphand.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="leapgesture.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">leapgesture</td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="leaphand.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> leapgesture</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

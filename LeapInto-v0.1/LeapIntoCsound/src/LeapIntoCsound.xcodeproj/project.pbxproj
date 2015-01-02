@@ -1,0 +1,256 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8746EB301A50238400CE62F0 /* libLeap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8746EB2F1A50238400CE62F0 /* libLeap.dylib */; };
+		B904ECCB1790285400877F9D /* LeapIntoCSound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B904ECCA1790285400877F9D /* LeapIntoCSound.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		8746EB2F1A50238400CE62F0 /* libLeap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libLeap.dylib; path = ../../LeapDeveloperKit/LeapSDK/lib/libLeap.dylib; sourceTree = "<group>"; };
+		B904ECA91790218A00877F9D /* libLeapIntoCsound.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libLeapIntoCsound.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		B904ECCA1790285400877F9D /* LeapIntoCSound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LeapIntoCSound.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B904ECA61790218A00877F9D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8746EB301A50238400CE62F0 /* libLeap.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B904ECA01790218A00877F9D = {
+			isa = PBXGroup;
+			children = (
+				8746EB2F1A50238400CE62F0 /* libLeap.dylib */,
+				B904ECCA1790285400877F9D /* LeapIntoCSound.cpp */,
+				B904ECAA1790218A00877F9D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B904ECAA1790218A00877F9D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B904ECA91790218A00877F9D /* libLeapIntoCsound.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		B904ECA71790218A00877F9D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		B904ECA81790218A00877F9D /* LeapIntoCsound.temp_caseinsensitive_rename */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B904ECAD1790218A00877F9D /* Build configuration list for PBXNativeTarget "LeapIntoCsound.temp_caseinsensitive_rename" */;
+			buildPhases = (
+				B904ECA51790218A00877F9D /* Sources */,
+				B904ECA61790218A00877F9D /* Frameworks */,
+				B904ECA71790218A00877F9D /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LeapIntoCsound.temp_caseinsensitive_rename;
+			productName = LeapIntoCSound;
+			productReference = B904ECA91790218A00877F9D /* libLeapIntoCsound.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B904ECA11790218A00877F9D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Simon Kenny";
+			};
+			buildConfigurationList = B904ECA41790218A00877F9D /* Build configuration list for PBXProject "LeapIntoCsound" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = B904ECA01790218A00877F9D;
+			productRefGroup = B904ECAA1790218A00877F9D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B904ECA81790218A00877F9D /* LeapIntoCsound.temp_caseinsensitive_rename */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B904ECA51790218A00877F9D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B904ECCB1790285400877F9D /* LeapIntoCSound.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		B904ECAB1790218A00877F9D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					/Library/Frameworks/CsoundLib64.framework/Versions/6.0/Headers/,
+					"/Users/studentaccount/LeapSDK+Examples_hotfix_public_mac_x64_0.8.1+6221/LeapSDK/include/",
+					/usr/local/include/,
+				);
+				LIBRARY_SEARCH_PATHS = "/Users/studentaccount/LeapSDK+Examples_hotfix_public_mac_x64_0.8.1+6221/LeapSDK/lib/";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				PRIVATE_HEADERS_FOLDER_PATH = /usr/local/include/;
+				PUBLIC_HEADERS_FOLDER_PATH = /usr/local/include/;
+				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		B904ECAC1790218A00877F9D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					/Library/Frameworks/CsoundLib64.framework/Versions/6.0/Headers/,
+					"/Users/studentaccount/LeapSDK+Examples_hotfix_public_mac_x64_0.8.1+6221/LeapSDK/include/",
+					/usr/local/include/,
+				);
+				LIBRARY_SEARCH_PATHS = "/Users/studentaccount/LeapSDK+Examples_hotfix_public_mac_x64_0.8.1+6221/LeapSDK/lib/";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRIVATE_HEADERS_FOLDER_PATH = /usr/local/include/;
+				PUBLIC_HEADERS_FOLDER_PATH = /usr/local/include/;
+				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		B904ECAE1790218A00877F9D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				EXECUTABLE_PREFIX = lib;
+				HEADER_SEARCH_PATHS = (
+					"~/Documents/Leap/LeapDeveloperKit/LeapSDK/include",
+					/usr/local/include/,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../LeapSDK+Examples_hotfix_public_mac_x64_0.8.1+6221/LeapSDK/lib\"",
+					/Users/simonkenny/Documents/Leap/LeapDeveloperKit/LeapSDK/lib,
+				);
+				PRODUCT_NAME = LeapIntoCsound;
+			};
+			name = Debug;
+		};
+		B904ECAF1790218A00877F9D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				EXECUTABLE_PREFIX = lib;
+				HEADER_SEARCH_PATHS = (
+					"~/Documents/Leap/LeapDeveloperKit/LeapSDK/include",
+					/usr/local/include/,
+				);
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../LeapSDK+Examples_hotfix_public_mac_x64_0.8.1+6221/LeapSDK/lib\"",
+					/Users/simonkenny/Documents/Leap/LeapDeveloperKit/LeapSDK/lib,
+				);
+				PRODUCT_NAME = LeapIntoCsound;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B904ECA41790218A00877F9D /* Build configuration list for PBXProject "LeapIntoCsound" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B904ECAB1790218A00877F9D /* Debug */,
+				B904ECAC1790218A00877F9D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B904ECAD1790218A00877F9D /* Build configuration list for PBXNativeTarget "LeapIntoCsound.temp_caseinsensitive_rename" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B904ECAE1790218A00877F9D /* Debug */,
+				B904ECAF1790218A00877F9D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B904ECA11790218A00877F9D /* Project object */;
+}

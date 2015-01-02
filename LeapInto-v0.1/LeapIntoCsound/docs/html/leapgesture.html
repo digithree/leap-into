@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>leapgesture</title>
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">leapgesture</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="leaphand.html">Prev</a> </td>
+          <th width="60%" align="center">[unofficial]</th>
+          <td width="20%" align="right"> <a accesskey="n" href="leaphand.html">Next</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="leapgesture"></a>
+      <div class="titlepage"></div>
+      <a id="IndexLeapgesture" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">leapgesture</span></h2>
+        <p>leapgesture — Reads gesture data from Leap Motion device</p>
+      </div>
+      <div class="refsect1">
+        <a id="id693533"></a>
+        <h2>Description</h2>
+        <p> Reads gesture data from Leap Motion device. The Leap Motion is a motion sensing peripheral specially designed to sense hands, fingers and thin tools (such a pencil or conducting batton). Leap Gestures are simple gestures performed by fingers or a tool. Please visit <a href="http://leapmotion.com">leapmotion.com</a> for info on how to perform gestures.</p>
+      </div>
+      <div class="refsect1">
+        <a id="id694126"></a>
+        <h2>Syntax</h2>
+        <pre class="synopsis">kout1 [,kout2, kout3] leapgesture ktype, kinfo</pre>
+      </div>
+      <div class="refsect1">
+        <a id="id694145"></a>
+        <h2>Initialization</h2>
+        <p>
+	<span class="emphasis"><em>ktype -- </em></span>gesture type. Can be one of the following:</p>
+        <ul>
+          <li>
+            <p>0: key tap</p>
+          </li>
+          <li>
+            <p>1: screen tap</p>
+          </li>
+          <li>
+            <p>2: circle</p>
+          </li>
+          <li>
+            <p>3: swipe</p>
+          </li>
+        </ul>
+        <p>A key tap gesture is a quick movement of one finger towards the hand and then away from it, finishing in the same position as it started in. A screen tap is a quick movement of one finger towards the screen, much the same as a key tap. Key and screen taps are discrete gestures, meaning that they do not have a duration, they happen once, like a drum hit. A circle gesture is a circle traced in the air with one finger, which is fairly consistent in speed and circularity. Note that the finger performing the action must be visible to the leap, so be aware of hand occlusion. A swipe is the movement of a finger in a roughly straight line. Circle and swipe gestures are continuous and so give much more data during the lifetime of the gesture. See <em>kinfo </em>for more information.</p>
+        <p><em>kinfo </em>-- information type. Key and screen taps only have one <em>kinfo</em> type and so the value is ignored. This type is the position of the finger or tool when the gesture is complete. Circle and swipe gestures however have much more information avaliable:</p>
+        <p>Circle type <em>kinfo</em> options:</p>
+        <ul>
+          <li>
+            <p>0: (outs-3) center position</p>
+          </li>
+          <li>
+            <p>1: (outs-1) progress (number of circles traced)</p>
+          </li>
+          <li>
+            <p>2: (outs-1) rate of progress change</p>
+          </li>
+          <li>
+            <p>3: (outs-1) angle</p>
+          </li>
+          <li>
+            <p>4: (outs-1) radius</p>
+          </li>
+          <li>
+            <p>3: (outs-3) normal vector (to flat circular &quot;disk&quot;)</p>
+          </li>
+          <li>4: (outs-1) alive time</li>
+        </ul>
+        <p>For swipe type gesture, <em>kinfo</em> can be:</p>
+        <ul>
+          <li>
+            <p>0: (outs-3) current position</p>
+          </li>
+          <li>
+            <p>1: (outs-1) start position</p>
+          </li>
+          <li>
+            <p>2: (outs-1) length of swipe</p>
+          </li>
+          <li>
+            <p>3: (outs-1) velocity</p>
+          </li>
+          <li>
+            <p>4: (outs-3) direction</p>
+          </li>
+          <li>5: (outs-1) alive time</li>
+        </ul>
+<p>&nbsp;</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<table border="0" summary="Note: Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png" /></td>
+              <th align="left">Note</th>
+        </tr>
+            <tr>
+              <td align="left" valign="top"><p><em>ktype </em>and <em>kinfo</em> can be changed dynamically but if changing to a three output <em>kinfo</em> type, three ouput variables must be used initially</p></td>
+            </tr>
+      </table>
+</div>
+<blockquote>
+  <blockquote>&nbsp;</blockquote>
+        </blockquote>
+      </div>
+      <div class="refsect1">
+        <a id="id694427"></a>
+        <h2>Performance</h2>
+        <p>
+	<span class="emphasis"><em>kout</em></span><em>1, kout2, kout3</em>
+	-- k-rate output signals, the number of which is specified by the <em>kinfo</em> type. Three outputs are used for 3D points or vectors, such as hand position or velocity. All other output types are scalar, such as time alive, and only use one output, <em>kout1</em>. Some types have a 3D and a scalar version. Note that all 3D coordinates are normalized to between -1 and 1 (for z and x axies) or between 0 and 1 (for y axis), though there is no out of bounds checking and occasionally a value outside this range may be read. All angles are in radians. All time is in seconds.</p>
+</div>
+      <div class="refsect1">
+        <a id="id693787"></a>
+        <h2>Examples</h2>
+        <p>
+      Here is an example of the leapgesture opcode.
+      </p>
+        <div class="example">
+          <a id="id693809"></a>
+          <p class="title">
+            <strong>Example [no number]. Example of the leapgesture opcode.</strong>
+          </p>
+          <div class="example-contents">
+            <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
+            <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+-o dac --opcode-lib=libLeapIntoCsound.dylib
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+
+<span class="ohdr">sr</span>     <span class="op">=</span> 44100
+<span class="ohdr">ksmps</span>  <span class="op">=</span> 32
+<span class="ohdr">nchnls</span> <span class="op">=</span> 2
+<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+
+<span class="comment">; Swipe gesture example</span>
+<span class="comment">; The output is filtered pink noise. This uses a simple lowpass filter with the</span>
+<span class="comment">; cutoff frequency dependent on the velocity of the swipe. Portamento is applied to the</span>
+<span class="comment">; changing frequency with a long halflife. This produces a wind-like sound which dies</span>
+<span class="comment">; down gradually.</span>
+<span class="comment">;</span>
+<span class="comment">; From the Leap Motion API reference: The Leap Motion software recognizes a</span>
+<span class="comment">; linear movement of a finger as a Swipe gesture.</span>
+<span class="comment">; You can make a swipe gesture with any finger and in any direction. Swipe</span>
+<span class="comment">; gestures are continuous. Once the gesture starts, the Leap Motion software</span>
+<span class="comment">; will update the progress until the gesture ends. A swipe gesture ends when</span>
+<span class="comment">; the finger changes directions or moves too slow.</span>
+<span class="oblock">instr</span> 1
+
+iscalefactor <span class="opc">init</span> 20000
+ibandsize <span class="opc">init</span> 2000
+
+kvel <span class="opc">leapgesture</span> 3, 3    <span class="opc">; swipe, velocity</span>
+
+asig <span class="opc">pinkish</span> 0.5
+kfilter <span class="opc">port</span> (kvel * iscalefactor), 0.5
+asigfilter <span class="opc">butterlp</span> asig, kfilter
+
+asigfilter <span class="opc">clip</span> asigfilter, 0, 0.5
+
+<span class="opc">outs</span> asigfilter, asigfilter
+
+<span class="oblock">endin</span>
+
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="comment">; Run Csound for an hour</span>
+<span class="stamnt">f</span> 0 3600
+
+<span class="comment">; Run instrument indefinitely</span>
+<span class="stamnt">i</span> 1 0 -1
+
+<span class="stamnt">e</span>
+
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="id694620"></a>
+        <h2>See Also</h2>
+        <p>
+      <a class="link" href="leaphand.html" title="leaphand"><em class="citetitle">leaphand</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="id694683"></a>
+        <h2>Credits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td width="139">Author: Simon Kenny</td>
+          </tr>
+          <tr>
+            <td>2013</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>New in version 6.? [unofficial]</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="leaphand.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="leapgesture.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="leaphand.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">leaphand</td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="leapgesture.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> leaphand</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
