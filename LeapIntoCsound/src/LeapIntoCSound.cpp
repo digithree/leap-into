@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Simon Kenny. All rights reserved.
 //
 
-#include "float-version-double.h"
+//#include "float-version-double.h"
 #include "Leap.h"
 #include <OpcodeBase.hpp>
 #include <vector>
@@ -180,7 +180,7 @@ public:
             lastFrameTimeLong = frame.id();
             
             // first check for new hand data
-            if( !frame.hands().empty() ) {
+            if( !frame.hands().isEmpty() ) {
                 //printf("--- Frame: sec %f ---\n", (((double)frame.timestamp())/1000000.f) );
                 // --- one handed ---
                 

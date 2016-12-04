@@ -20,10 +20,10 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
     02111-1307 USA
 */
-                                                        /*  PROTOTYP.H  */
+/*  PROTOTYP.H  */
 #if defined(__BUILDING_LIBCSOUND) && !defined(_CSOUND_PROTO_H)
 #define _CSOUND_PROTO_H
-
+#include <sysdep.h>
 #include <sndfile.h>
 #ifdef __cplusplus
 extern "C" {
@@ -34,30 +34,30 @@ void    *mmalloc(CSOUND *, size_t);
 void    *mcalloc(CSOUND *, size_t);
 void    *mrealloc(CSOUND *, void *, size_t);
 void    mfree(CSOUND *, void *);
+void    *mmallocDebug(CSOUND *, size_t, char*, int);
+void    *mcallocDebug(CSOUND *, size_t, char*, int);
+void    *mreallocDebug(CSOUND *, void *, size_t, char*, int);
+void    mfreeDebug(CSOUND *, void *, char*, int);
+char    *cs_strdup(CSOUND*, char*);
+char    *cs_strndup(CSOUND*, char*, size_t);
 void    csoundAuxAlloc(CSOUND *, size_t, AUXCH *), auxchfree(CSOUND *, INSDS *);
 void    fdrecord(CSOUND *, FDCH *), fdclose(CSOUND *, FDCH *);
 void    fdchclose(CSOUND *, INSDS *);
 CS_PRINTF2  void    synterr(CSOUND *, const char *, ...);
 CS_NORETURN CS_PRINTF2  void    csoundDie(CSOUND *, const char *, ...);
 CS_PRINTF2  int     csoundInitError(CSOUND *, const char *, ...);
-CS_PRINTF2  int     csoundPerfError(CSOUND *, const char *, ...);
+CS_PRINTF3  int     csoundPerfError(CSOUND *, INSDS *ip, const char *, ...);
 CS_PRINTF2  void    csoundWarning(CSOUND *, const char *, ...);
 CS_PRINTF2  void    csoundDebugMsg(CSOUND *, const char *, ...);
 CS_PRINTF2  void    csoundErrorMsg(CSOUND *, const char *, ...);
 void    csoundErrMsgV(CSOUND *, const char *, const char *, va_list);
 CS_NORETURN void    csoundLongJmp(CSOUND *, int retval);
-void    putop(CSOUND *, TEXT *);
-void    rdorchfile(CSOUND *), otran(CSOUND *);
-char    argtyp(CSOUND *, char *);
 TEXT    *getoptxt(CSOUND *, int *);
-int     express(CSOUND *, char *);
-int     lgexist(CSOUND *, const char *);
-void    oload(CSOUND *);
 void    reverbinit(CSOUND *);
 void    dispinit(CSOUND *);
 int     init0(CSOUND *);
 void    scsort(CSOUND *, FILE *, FILE *);
-void    scsortstr(CSOUND *);
+char    *scsortstr(CSOUND *, CORFIL *);
 int     scxtract(CSOUND *, CORFIL *, FILE *);
 int     rdscor(CSOUND *, EVTBLK *);
 int     musmon(CSOUND *);
@@ -65,7 +65,6 @@ void    RTLineset(CSOUND *);
 FUNC    *csoundFTFind(CSOUND *, MYFLT *);
 FUNC    *csoundFTFindP(CSOUND *, MYFLT *);
 FUNC    *csoundFTnp2Find(CSOUND *, MYFLT *);
-void    cs_beep(CSOUND *);
 MYFLT   intpow(MYFLT, int32);
 void    list_opcodes(CSOUND *, int);
 char    *getstrformat(int format);
@@ -74,20 +73,24 @@ char    *type2string(int type);
 int     type2csfiletype(int type, int encoding);
 int     sftype2csfiletype(int type);
 void    rewriteheader(void *ofd);
-int     readOptions(CSOUND *, FILE *, int);
-int     argdecode(CSOUND *, int, char **);
+#if 0
+int     readOptions_file(CSOUND *, FILE *, int);
+#else
+int     readOptions(CSOUND *, CORFIL *, int);
+#endif
+int     argdecode(CSOUND *, int, const char **);
 void    remove_tmpfiles(CSOUND *);
 void    add_tmpfile(CSOUND *, char *);
 void    xturnoff(CSOUND *, INSDS *);
 void    xturnoff_now(CSOUND *, INSDS *);
 int     insert_score_event(CSOUND *, EVTBLK *, double);
-MEMFIL  *ldmemfile(CSOUND *, const char *);
-MEMFIL  *ldmemfile2(CSOUND *, const char *, int);
+//MEMFIL  *ldmemfile(CSOUND *, const char *);
+//MEMFIL  *ldmemfile2(CSOUND *, const char *, int);
 MEMFIL  *ldmemfile2withCB(CSOUND *csound, const char *filnam, int csFileType,
-                         int (*callback)(CSOUND*, MEMFIL*));
+                          int (*callback)(CSOUND*, MEMFIL*));
 void    rlsmemfiles(CSOUND *);
 int     delete_memfile(CSOUND *, const char *);
-char    *csoundTmpFileName(CSOUND *, char *, const char *);
+char    *csoundTmpFileName(CSOUND *, const char *);
 void    *SAsndgetset(CSOUND *, char *, void *, MYFLT *, MYFLT *, MYFLT *, int);
 int     getsndin(CSOUND *, void *, MYFLT *, int, void *);
 void    *sndgetset(CSOUND *, void *);
@@ -100,10 +103,12 @@ int     check_rtaudio_name(char *fName, char **devName, int isOutput);
 int     csoundLoadOpcodeDB(CSOUND *, const char *);
 void    csoundDestroyOpcodeDB(CSOUND *);
 int     csoundCheckOpcodePluginFile(CSOUND *, const char *);
-int     csoundLoadAllPluginOpcodes(CSOUND *);
+//int     csoundLoadAllPluginOpcodes(CSOUND *);
 int     csoundLoadAndInitModule(CSOUND *, const char *);
 void    csoundNotifyFileOpened(CSOUND *, const char *, int, int, int);
 int     insert_score_event_at_sample(CSOUND *, EVTBLK *, int64_t);
+
+char *get_arg_string(CSOUND *, MYFLT);
 
 /**
  * Register a function to be called at note deactivation.
@@ -139,13 +144,10 @@ char *csoundGetOpcodeName(void *p);
  */
 int csoundGetInputArgCnt(void *p);
 
-/**
- * Returns a binary value of which bit 0 is set if the first input
- * argument is a-rate, bit 1 is set if the second input argument is
- * a-rate, and so on.
- * Only the first 31 arguments are guaranteed to be reported correctly.
- */
-unsigned long csoundGetInputArgAMask(void *p);
+
+/** Returns the CS_TYPE for an opcode's arg pointer */
+
+CS_TYPE* csoundGetTypeForArg(void* argPtr);
 
 /**
  * Returns a binary value of which bit 0 is set if the first input
@@ -164,14 +166,6 @@ char *csoundGetInputArgName(void *p, int n);
  * Returns the number of output arguments for opcode 'p'.
  */
 int csoundGetOutputArgCnt(void *p);
-
-/**
- * Returns a binary value of which bit 0 is set if the first output
- * argument is a-rate, bit 1 is set if the second output argument is
- * a-rate, and so on.
- * Only the first 31 arguments are guaranteed to be reported correctly.
- */
-unsigned long csoundGetOutputArgAMask(void *p);
 
 /**
  * Returns a binary value of which bit 0 is set if the first output
@@ -281,14 +275,14 @@ int csoundYield(CSOUND *);
  * Returns zero on success.
  */
 int csoundAddUtility(CSOUND *, const char *name,
-                               int (*UtilFunc)(CSOUND *, int, char **));
+                     int (*UtilFunc)(CSOUND *, int, char **));
 
 /**
  * Set description text for the specified utility.
  * Returns zero on success.
  */
 int csoundSetUtilityDescription(CSOUND *, const char *utilName,
-                                          const char *utilDesc);
+                                const char *utilDesc);
 
 /**
  * Remove all configuration variables of Csound instance 'csound',
@@ -302,4 +296,3 @@ int csoundDeleteAllConfigurationVariables(CSOUND *);
 #endif
 
 #endif  /* __BUILDING_LIBCSOUND && !_CSOUND_PROTO_H */
-

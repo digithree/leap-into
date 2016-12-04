@@ -25,16 +25,31 @@
 #define CSOUND_REMOTE_H
 
 #ifdef HAVE_SOCKETS
-#ifdef WIN32
-#include <winsock.h>
-#else
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#ifdef HAVE_UNISTD_H
-#  include <unistd.h>
-#endif
-#endif
+  #if defined(WIN32) && !defined(__CYGWIN__)
+    #include <winsock2.h>
+    #ifndef SHUT_RDWR
+      #define SHUT_RD   0x00
+      #define SHUT_WR   0x01
+      #define SHUT_RDWR 0x02
+    #endif
+  #else
+    #include <sys/ioctl.h>
+    #ifdef __HAIKU__
+      #include <sys/sockio.h>
+    #endif
+    #include <sys/socket.h>
+    #include <netinet/in.h>
+    #ifdef MACOSX
+      #include <net/if.h>
+    #endif
+    #ifdef LINUX
+      #include <linux/if.h>
+    #endif
+    #include <arpa/inet.h>
+    #ifdef HAVE_UNISTD_H
+    #  include <unistd.h>
+    #endif
+  #endif
 #endif /* HAVE_SOCKETS */
 
 #include <stdlib.h>
@@ -96,22 +111,26 @@ typedef struct {                        /* structs for INSTR 0 opcodes */
 
 typedef struct {                        /* structs for INSTR 0 opcodes */
     OPDS    h;
-    MYFLT   *str1, *str2, *insno[64];
+   STRINGDAT  *str1, *str2;
+   MYFLT *insno[64];
 } INSREMOT;
 
 typedef struct {                                /* structs for INSTR 0 opcodes */
     OPDS    h;
-    MYFLT   *str1, *insno[64];
+    STRINGDAT *str1;
+    MYFLT  *insno[64];
 } INSGLOBAL;
 
 typedef struct {
     OPDS    h;
-    MYFLT   *str1, *str2, *chnum[16];
+  STRINGDAT   *str1, *str2;
+  MYFLT  *chnum[16];
 } MIDREMOT;
 
 typedef struct {                                /* structs for INSTR 0 opcodes */
     OPDS    h;
-    MYFLT   *str1, *chnum[16];
+  STRINGDAT   *str1;
+  MYFLT  *chnum[16];
 } MIDGLOBAL;
 
 int CLsend(CSOUND *csound, int conn, void *data, int length);
