@@ -9,6 +9,11 @@ ksmps = 32
 0dbfs = 1
 nchnls = 2 
 
+; IMPORTANT!!! You must have both the offical Leap binary and the LeapIntoCsound binary in the path
+; Most simply, you can have both these files in the same directory (i.e. folder) as this CSD file
+; On Mac OS X, these files are libLeapIntoCsound.dylib and libLeap.dylib
+
+
 ;------------------------------------------
 ;
 ;  		Swipe gesture example
@@ -105,7 +110,7 @@ e
   <g>46</g>
   <b>255</b>
  </bgcolor>
- <bsbObject version="2" type="BSBVSlider">
+ <bsbObject type="BSBVSlider" version="2">
   <objectName>slider1</objectName>
   <x>5</x>
   <y>5</y>
@@ -126,18 +131,3 @@ e
 </bsbPanel>
 <bsbPresets>
 </bsbPresets>
-<MacOptions>
-Version: 3
-Render: Real
-Ask: Yes
-Functions: ioObject
-Listing: Window
-WindowBounds: 72 179 400 200
-CurrentView: io
-IOViewEdit: On
-Options:
-</MacOptions>
-<MacGUI>
-ioView nobackground {59367, 11822, 65535}
-ioSlider {5, 5} {20, 100} 0.000000 1.000000 0.000000 slider1
-</MacGUI>

@@ -1,6 +1,6 @@
 <CsoundSynthesizer>
 <CsOptions>
--o dac --opcode-lib=libLeapIntoCsound.dylib
+-o dac --opcode-lib=libLeapIntoCsound.dylib -v
 </CsOptions>
 <CsInstruments>
 
@@ -8,6 +8,11 @@ sr = 44100
 ksmps = 32
 0dbfs = 1
 nchnls = 2 
+
+; IMPORTANT!!! You must have both the offical Leap binary and the LeapIntoCsound binary in the path
+; Most simply, you can have both these files in the same directory (i.e. folder) as this CSD file
+; On Mac OS X, these files are libLeapIntoCsound.dylib and libLeap.dylib
+
 
 ;------------------------------------------
 ;		Hand velocity example
