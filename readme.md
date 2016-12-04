@@ -14,5 +14,6 @@ Provides two opcodes for Csound, leaphand and leapgesture. For more information 
 ### Update 04.12.16
 * Updated LeapIntoCsound with latest Csound 6.08 SDK and Leap SDK 2.3.1
 * Add warning comment to examples, library binaries (e.g. dylib files on Mac OS X) must be in PATH of csound when running CSD files
+
 ### Update 02.01.15
 * Added LeapIntoCsound library for Csound
