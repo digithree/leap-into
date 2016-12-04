@@ -1,4 +1,4 @@
-Copyright (c) 2014, Simon Kenny
+Copyright (c) 2016, Simon Kenny
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
